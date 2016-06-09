@@ -28,7 +28,7 @@ commands=(
     echo
     fortune
     ping
-    slap
+    bash
     url
     whereami
 )
@@ -49,8 +49,10 @@ case "$cmd" in
     ping)
         [[ -n "$nicks" ]] && printf -- "%s: ping!\n" "$nicks" || printf -- "%s: pong!\n" "$nick"
         ;;
-    slap)
-        printf -- "%s slaps %s with %s\n" "$nick" "${nicks:-his cohones}" "${extra:-a large herpderp}"
+    bash)
+        tmp="echo $extra"
+        tmp2=`eval "$tmp"`
+        printf -- "%s\n" "$tmp2"
         ;;
     url)
         link="$(sed 's;.*\(http[^ ]*\).*;\1;' <<< "$extra")"
@@ -67,5 +69,6 @@ case "$cmd" in
     whereami)
         printf -- "%s: this! is! %s!!!!!\n" "$nick" "$chan"
         ;;
+        
 esac
 
